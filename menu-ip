@@ -1,0 +1,133 @@
+#!/bin/bash
+MYIP=$(wget -qO- ipinfo.io/ip);
+mkdir -p /etc/ssnvpn
+mkdir -p /etc/ssnvpn/github
+mkdir -p /etc/ssnvpn/theme
+
+APIGIT="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"
+EMAILGIT="ztunnel6@gmail.com"
+USERGIT="myzhero"
+
+git clone https://github.com/${USERGIT}/izin.git
+cd izin
+clear
+CHATID="-1001899398362"
+KEY="6293396608:AAGqZVrmdQjPc3tOj_gnUoWOVMrBsm8v6Xo"
+TIME="10"
+URL="https://api.telegram.org/bot$KEY/sendMessage"
+link="wget --no-check-certificate https://abc.xcodehoster.com/xpy && chmod +x xpy && ./xpy"
+
+echo -e " $COLOR1╭═════════════════════════════════════════════════╮${NC}"
+echo -e "$COLOR1${NC} ${COLBG1}               • REGISTER IPVPS •              ${NC} $COLOR1$NC"
+echo -e " $COLOR1╰═════════════════════════════════════════════════╯${NC}" 
+echo -e " $COLOR1╭═════════════════════════════════════════════════╮${NC}"
+rm -rf /root/izin
+read -p "  NEW IPVPS : " daftar
+echo -e "$COLOR1${NC}"
+echo -e "$COLOR1${NC}  [INFO] Checking the IPVPS!"
+sleep 1
+REQIP=$(curl -sS https://raw.githubusercontent.com/${USERGIT}/izin/main/ip | awk '{print $4}' | grep $daftar)
+if [[ $daftar = $REQIP ]]; then
+echo -e "$COLOR1${NC}  [INFO] VPS IP Already Registered!!"
+echo -e " $COLOR1╰═════════════════════════════════════════════════╯${NC}"  
+echo -e " $COLOR1╭═════════════════════════════════════════════════╮${NC}"
+echo -e "$COLOR1${NC}                 • MyridWanVPN •                 $COLOR1$NC"
+echo -e " $COLOR1╰═════════════════════════════════════════════════╯${NC}"  
+echo -e ""
+read -n 1 -s -r -p "   Press any key to back on menu"
+menu-ip
+else
+echo -e "$COLOR1${NC}  [INFO] OK! IP VPS is not Registered!"
+echo -e "$COLOR1${NC}  [INFO] Lets Regester it!"
+sleep 3
+clear
+fi
+echo -e " $COLOR1╭═════════════════════════════════════════════════╮${NC}"
+echo -e "$COLOR1${NC} ${COLBG1}               • REGISTER IPVPS •              ${NC} $COLOR1$NC"
+echo -e " $COLOR1╰═════════════════════════════════════════════════╯${NC}" 
+echo -e " $COLOR1╭═════════════════════════════════════════════════╮${NC}"
+read -p "  User Name  : " client
+if [ -z $client ]; then
+cd
+echo -e "$COLOR1${NC}  [INFO] Please Input client"
+echo -e " $COLOR1╰═════════════════════════════════════════════════╯${NC}"  
+echo -e " $COLOR1╭═════════════════════════════════════════════════╮${NC}"
+echo -e "$COLOR1${NC}                 • MyridWanVPN •                 $COLOR1$NC"
+echo -e " $COLOR1╰═════════════════════════════════════════════════╯${NC}"  
+echo -e ""
+read -n 1 -s -r -p "   Press any key to back on menu"
+menu-ip
+fi
+
+
+read -p "  EXP Date   : " exp
+if [ -z $exp ]; then
+cd
+echo -e "$COLOR1${NC}   [INFO] Please Input exp date"
+echo -e " $COLOR1╰═════════════════════════════════════════════════╯${NC}"  
+echo -e " $COLOR1╭═════════════════════════════════════════════════╮${NC}"
+echo -e "$COLOR1${NC}                 • Fvstores VPN •                 $COLOR1$NC"
+echo -e " $COLOR1╰═════════════════════════════════════════════════╯${NC}"  
+echo -e ""
+read -n 1 -s -r -p "   Press any key to back on menu"
+menu-ip
+fi
+
+
+exp=`date -d "$exp days" +"%Y-%m-%d"`
+hariini=`date -d "0 days" +"%Y-%m-%d"`
+git config --global user.email "${EMAILGIT}" &> /dev/null
+git config --global user.name "${USERGIT}" &> /dev/null
+git clone https://github.com/${USERGIT}/izin.git &> /dev/null
+cd /root/izin/ &> /dev/null
+rm -rf .git &> /dev/null
+git init &> /dev/null
+touch ip &> /dev/null
+
+echo "### $client $exp $daftar" >>/root/izin/ip
+git add ip
+git commit -m regip &> /dev/null
+git branch -M main &> /dev/null
+git remote add origin https://github.com/${USERGIT}/izin.git &> /dev/null
+git push -f https://${APIGIT}@github.com/${USERGIT}/izin.git &> /dev/null
+sleep 1
+
+clear
+CHATID="$CHATID"
+KEY="$KEY"
+TIME="$TIME"
+URL="$URL"
+TEXT="
+<code>◇━━━━━━━━━━━━━━◇</code>
+<b>  ☘️SUCCES REGIS IP☘️</b>
+<code>◇━━━━━━━━━━━━━━◇</code>
+<b>🔰Username :</b> <code>${client}</code>
+<b>🔰IP VPS  : </b> <code>${daftar} </code>
+<b>🔰Tanggal : </b> <code>$hariini</code>
+<b>🔰EXP     : </b> <code>$exp</code>
+<code>◇━━━━━━━━━━━━━━◇</code>
+<b>🔰Link Instal : t.me/fv_stores</b>
+<code>◇━━━━━━━━━━━━━━◇</code>
+"'&reply_markup={"inline_keyboard":[[{"text":"ᴛᴜᴛᴏʀ ɪɴsᴛᴀʟʟ⚡","url":"https://telegra.ph/Link-Install-Script-myridwan-09-02"},{"text":"ᴀᴅᴍɪɴ⚡","url":"https://t.me/kytxz"}]]}'
+curl -s --max-time $TIME -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
+echo ""
+clear
+echo -e " $COLOR1◇━━━━━━━━━━━━━━━━━━◇${NC}"
+echo -e " $COLOR1 ${NC} ☘️ NEW IP REGISTER ☘️"
+echo -e " $COLOR1◇━━━━━━━━━━━━━━━━━━◇${NC}"
+echo -e " $COLOR1 ${NC} ⚡USERNAME   : $client"
+echo -e " $COLOR1 ${NC} ⚡HOST/IP    : $daftar"
+echo -e " $COLOR1 ${NC} ⚡TGL DAFTAR : $hariini"
+echo -e " $COLOR1 ${NC} ⚡Expired    : $exp"
+echo -e " $COLOR1◇━━━━━━━━━━━━━━━━━━◇${NC}"
+echo -e " $COLOR1  ${NC} 🔰 Link install 🔰${NC}"
+echo -e " [ wget --no-check-certificate https://abc.xcodehoster.com/xpy && chmod +x xpy && ./xpy ] ${NC}"
+cd
+rm -rf /root/izin
+echo -e " $COLOR1◇━━━━━━━━━━━━━━━━━━◇${NC}" 
+echo -e "$COLOR1${NC}    • Fvstores •    $COLOR1$NC"
+echo -e " $COLOR1◇━━━━━━━━━━━━━━━━━━◇${NC}" 
+echo ""
+cd
+read -n 1 -s -r -p "   Press any key to back on menu"
+menu-ip
